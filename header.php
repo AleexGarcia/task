@@ -1,15 +1,17 @@
 <?php
-function headerComponent($nivel = null)
+function headerComponent($nivel = null, $nome = null)
 {
 
     switch ($nivel) {
         case 'admin':
             echo "
                 <header>
-                    <h1>Tarefas</h1>
+                <div>
+                <h1>Tarefas</h1>
+                <p>Bem-vindo, $nome !</p>
+                </div>
                     <nav>
                         <ul>
-                            <li><a href='./gerenciar-tarefas.php'>Gerenciar tarefas</a></li>
                             <li><a href='./gerenciar-usuarios.php'>Gerenciar usuários</a></li>
                             <li><a href='./dashboard.php'>Dashboard</a></li>
                             <li><a href='./perfil.php'>Perfil</a></li>
@@ -22,10 +24,12 @@ function headerComponent($nivel = null)
         case 'coordenador':
             echo "
             <header>
-            <h1>Tarefas</h1>
+            <div>
+                <h1>Tarefas</h1>
+                <p>Bem-vindo, $nome !</p>
+                </div>
             <nav>
                 <ul>
-                    <li><a href='./gerenciar-tarefas.php'>Gerenciar tarefas</a></li>
                     <li><a href='./dashboard.php'>Dashboard</a></li>
                     <li><a href='./perfil.php'>Perfil</a></li>
                 </ul>
@@ -37,7 +41,10 @@ function headerComponent($nivel = null)
         case 'padrao':
             echo "
             <header>
-            <h1>Tarefas</h1>
+            <div>
+                <h1>Tarefas</h1>
+                <p>Bem-vindo, $nome !</p>
+                </div>
             <nav>
                 <ul>
                     <li><a href='./dashboard.php'>Dashboard</a></li>

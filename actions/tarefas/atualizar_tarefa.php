@@ -5,6 +5,7 @@ require_once('../../db/conexao.php');
 session_start();
 
 $token = isset($_SESSION['token']) ? $_SESSION['token'] : null;
+$token = json_decode($token);
 
 // Verifica se o formulário foi submetido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insere o novo usuário no banco de dados
     // nivel: 1 - usuário padrão , 2 - coordenador , 3 - admin
 
-    if ($nivel == 'padrao') {
+    if ($token->nivel == 'padrao') {
         $sql = "UPDATE tarefas SET status = '$status' WHERE id = $id";
     } else {
         $sql = "UPDATE tarefas SET status = '$status', descricao = '$descricao', data_entrega = '$data_entrega', id_responsavel = '$id_responsavel' WHERE id = $id";

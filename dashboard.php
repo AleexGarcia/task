@@ -16,7 +16,12 @@ require_once("./db/conexao.php");
 $token = json_decode($_SESSION["token"]);
 $id = $token->id;
 
-$sql = "SELECT * FROM tarefas WHERE id_responsavel = $id";
+if ($token->nivel == 'cordenador' || $token->nivel == 'admin') {
+    $sql = "SELECT * FROM tarefas WHERE id_criador = $id";
+} else {
+    $sql = "SELECT * FROM tarefas WHERE id_responsavel = $id";
+}
+
 $result = $conn->query($sql);
 
 // Fecha a conexão com o banco de dados
@@ -38,27 +43,51 @@ $conn->close();
 <body>
     <?php
     require_once('./header.php');
-    HeaderComponent($token->nivel);
+    HeaderComponent($token->nivel,$token->nome);
     ?>
     <main>
         <div class="dashboard-container">
             <h2>Dashboard</h2>
-            <p>Bem-vindo, <?php echo $token->nome; ?>!</p>
-            <h3>Suas Tarefas:</h3>
+            <div class="top-box">
+                <?php
+                if ($token->nivel == 'cordenador' || $token->nivel == 'admin') {
+                    echo "<h3>Gerenciar tarefas:</h3>";
+                    echo "<a href='./tarefa.php'>Criar Tarefa</a>";
+                } else {
+                    echo "<h3>Suas tarefas</h3>";
+                }
+                ?>
+            </div>
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo "<div class='tarefa'>";
-                    echo "<p><strong>Descrição:</strong> " . $row["descricao"] . "</p>";
-                    echo "<p><strong>Data Final de Entrega:</strong> " . $row["data_entrega"] . "</p>";
-                    echo "<form action='confirmar_entrega.php' method='post'>";
-                    echo "<input type='hidden' name='id_tarefa' value='" . $row["id"] . "'>";
-                    echo "<button type='submit'>Confirmar Entrega</button>";
-                    echo "</form>";
-                    echo "</div>";
+                    if ($token->nivel == 'cordenador' || $token->nivel == 'admin') {
+                        echo "<div class='tarefa'>";
+                        echo "<p><strong>Descrição:</strong> " . $row["descricao"] . "</p>";
+                        echo "<p><strong>Data Final de Entrega:</strong> " . $row["data_entrega"] . "</p>";
+                        echo "<p><strong>Status:</strong> {$row['status']}</p>";
+                        echo "<div>
+                            <a href='./actions/tarefas/deletar_tarefa.php?id={$row['id']}'>Excluir</a>
+                            <a href='./tarefa.php?id={$row['id']}'>Editar</a>
+                        </div>";
+                        echo "</div>";
+                    } else {
+                        echo "<div class='tarefa'>";
+                        echo "<p><strong>Descrição:</strong> " . $row["descricao"] . "</p>";
+                        echo "<p><strong>Data Final de Entrega:</strong> " . $row["data_entrega"] . "</p>";
+                        echo "<form action='confirmar_entrega.php' method='post'>";
+                        echo "<input type='hidden' name='id_tarefa' value='" . $row["id"] . "'>";
+                        echo "<button type='submit'>Confirmar Entrega</button>";
+                        echo "</form>";
+                        echo "</div>";
+                    }
                 }
             } else {
-                echo "<p>Nenhuma tarefa atribuída no momento.</p>";
+                if ($token->nivel == 'cordenador' || $token->nivel == 'admin') {
+                    echo "<p>Nenhuma tarefa criada no momento.</p>";
+                } else {
+                    echo "<p>Nenhuma tarefa atribuída no momento.</p>";
+                }
             }
             ?>
         </div>

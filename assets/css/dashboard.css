@@ -63,3 +63,9 @@ a:hover {
     text-decoration: underline;
 }
 
+.top-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
