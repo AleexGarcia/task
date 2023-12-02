@@ -1,0 +1,19 @@
+header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    margin: 0;
+    border-bottom: 1px solid #66666670;
+}
+header > nav > ul{
+    display: flex;
+    gap: .5rem;
+}
+header > nav > ul > li {
+    list-style: none;
+}
+header > nav > ul > li > a {
+    text-decoration: none;
+}
