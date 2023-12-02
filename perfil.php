@@ -42,7 +42,7 @@ $conn->close();
     <main>
         <div class="container">
             <h2>Editar perfil</h2>
-            <form action="process_edit_user.php" method="post">
+            <form action="./actions/usuarios/atualizar_usuario.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $userDetails['id']; ?>">
     
                 <label for="nome">Name:</label>

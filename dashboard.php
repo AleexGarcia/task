@@ -14,6 +14,7 @@ require_once("./db/conexao.php");
 
 // Consulta para obter as tarefas atribuídas ao usuário
 $token = json_decode($_SESSION["token"]);
+
 $id = $token->id;
 
 if ($token->nivel == 'cordenador' || $token->nivel == 'admin') {

@@ -26,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($token->nivel == 'padrao') {
         $sql = "UPDATE tarefas SET status = '$status' WHERE id = $id";
     } else {
-        $sql = "UPDATE tarefas SET status = '$status', descricao = '$descricao', data_entrega = '$data_entrega', id_responsavel = '$id_responsavel' WHERE id = $id";
+        $sql = "UPDATE tarefas SET status = '$status', descricao= '$descricao', data_entrega= '$data_entrega', id_responsavel= '$id_responsavel' WHERE id= $id";
     }
-
+    var_dump($sql);
     if ($conn->query($sql) === TRUE) {
         header('Location: ../../dashboard.php');
         exit;

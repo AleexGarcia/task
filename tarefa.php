@@ -54,9 +54,12 @@ $conn->close();
             echo !isset($_GET['id']) ? "<h2>Cadastrar tarefa</h2>" : "<h2>Editar tarefa</h2>";
             $action = !isset($_GET['id']) ? 'criar_tarefa.php' : 'atualizar_tarefa.php'
             ?>
-            <form action="<?php echo "./actions/tarefas/$action"?>" method="post">
+            <form action="<?php echo "./actions/tarefas/$action" ?>" method="post">
 
+                <input hidden value="<?php echo isset($_GET['id']) ? $resultsTarefa['id'] : ''; ?>" type="text" name="id" required>
+                <input hidden value="<?php echo isset($_GET['id']) ? $resultsTarefa['status'] : ''; ?>" type="text" name="status" required>
                 <input hidden type="number" name="id_criador" value="<?php echo $token->id; ?>">
+
 
                 <label for="descricao">Descrição:</label>
                 <input value="<?php echo isset($_GET['id']) ? $resultsTarefa['descricao'] : ''; ?>" type="text" name="descricao" required>
