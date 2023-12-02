@@ -32,6 +32,7 @@ $conn->close();
     <title>Dashboard</title>
     <link rel="stylesheet" href="./assets/css/dashboard.css">
     <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
 </head>
 
 <body>

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-    session_start();
+<?php
+session_start();
 
-    // Verifique se o usuário está autenticado; redirecione para a página de login se não estiver
-    if (isset($_SESSION["token"])) {
-        header("Location: ./dashboard.php");
-        exit();
-    }
-    
+// Verifique se o usuário está autenticado e direciona pro dashboard
+if (isset($_SESSION["token"])) {
+    header("Location: ./dashboard.php");
+    exit();
+}
+
 
 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./assets/css/form-acesso.css">
     <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
 
 <body>
     <?php

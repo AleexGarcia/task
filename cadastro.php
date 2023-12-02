@@ -3,13 +3,11 @@
 <?php
 session_start();
 
-// Verifique se o usuário está autenticado; redirecione para a página de login se não estiver
+// Verifique se o usuário está autenticado e direciona pro dashboard
 if (isset($_SESSION["token"])) {
     header("Location: ./dashboard.php");
     exit();
 }
-
-
 ?>
 
 <head>

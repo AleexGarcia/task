@@ -63,13 +63,3 @@ a:hover {
     text-decoration: underline;
 }
 
-footer{
-    padding: 1rem 0;
-    background-color: #666;
-    text-align: center;
-}
-
-footer > p {
-    color: white;
-    
-}
